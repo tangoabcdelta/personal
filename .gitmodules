@@ -1,0 +1,3 @@
+[submodule "MyMFE"]
+	path = MyMFE
+	url = https://github.com/tangoabcdelta/MyMFE.git
