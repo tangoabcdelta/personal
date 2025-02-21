@@ -1,0 +1,35 @@
+name: basic-checks
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  basic-checks:
+    runs-on: [ self-hosted ]
+    steps:
+      - name: my-step
+        run: echo "Hello World!"
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Phony Check
+        run: exit 1
+
+      - name: Future Test Placeholder
+        run: echo "Placeholder for future tests like Snyk scan or unit tests"
+
+    outputs:
+      basic-check-status: ${{ steps.phony-check.outcome }}
+
+check-status:
+  needs: basic-checks
+  runs-on: [ self-hosted ]
+  steps:
+    - name: Check Basic Checks Status
+      run: >
+        if [ "${{ needs.basic-checks.outputs.basic-check-status }}" != "success" ];
+        then
+          echo "Basic checks failed. Disabling merge button."
+          exit 1
+        fi
