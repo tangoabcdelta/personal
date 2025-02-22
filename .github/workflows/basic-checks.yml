@@ -15,8 +15,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Phony Check
-        run: exit 1
+#      - name: Phony Check
+#        run: exit 1
 
       - name: Future Test Placeholder
         run: echo "Placeholder for future tests like Snyk scan or unit tests"
