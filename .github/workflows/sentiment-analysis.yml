@@ -45,6 +45,10 @@ jobs:
       - name: Install Sentiment Analysis Library
         run: |
           if ! pip show textblob > /dev/null 2>&1; then
+            # pip install textblob
+            # creating a virtual environment to help manage dependencies
+            python -m venv myenv
+            source myenv/bin/activate
             pip install textblob
           fi
 
