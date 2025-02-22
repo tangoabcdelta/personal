@@ -24,6 +24,68 @@ jobs:
       - name: Future Test Placeholder
         run: echo "Placeholder for future tests like Snyk scan or unit tests"
 
+      - name: Send Slack Notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Teams Notification
+        run: |
+          curl -H 'Content-Type: application/json' -d '{
+            "type": "message",
+            "attachments": [
+              {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "contentUrl": null,
+                "content": {
+                  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                  "type": "AdaptiveCard",
+                  "version": "1.2",
+                  "body": [
+                    {
+                      "type": "TextBlock",
+                      "text": "Build Notification",
+                      "weight": "Bolder",
+                      "size": "Medium"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "The build for the repository has completed.",
+                      "wrap": true
+                    },
+                    {
+                      "type": "FactSet",
+                      "facts": [
+                        {
+                          "title": "Repository:",
+                          "value": "${{ github.repository }}"
+                        },
+                        {
+                          "title": "Branch:",
+                          "value": "${{ github.ref }}"
+                        },
+                        {
+                          "title": "Commit:",
+                          "value": "${{ github.sha }}"
+                        }
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "Action.OpenUrl",
+                      "title": "View Build",
+                      "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                    }
+                  ]
+                }
+              }
+            ]
+          }' ${{ secrets.TEAMS_WEBHOOK_URL }}
+
     outputs:
       basic-check-status: ${{ steps.phony-check.outcome }}
 
