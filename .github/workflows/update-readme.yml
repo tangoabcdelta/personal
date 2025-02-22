@@ -1,0 +1,42 @@
+name: Update Table of Contents (TOC) in the Readme.md file
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-toc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+#      - name: Install markdown-toc
+#        run: npm install -g markdown-toc
+
+      - name: Check and Install markdown-toc
+        run: |
+          if ! command -v markdown-toc &> /dev/null; then
+            echo "markdown-toc not found, installing..."
+            npm install -g markdown-toc
+          else
+            echo "markdown-toc already installed"
+          fi
+
+      - name: Generate TOC
+        run: markdown-toc -i README.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'Update TOC'
+          git push
