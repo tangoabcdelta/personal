@@ -15,6 +15,7 @@ export NO_PROXY=localhost,127.0.0.1,10.96.0.0/12,192.168.59.0/24,192.168.49.0/24
 
 
 
+export PATH=/usr/sbin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/bin:$PATH
 export PATH=/usr/bin/:$PATH
@@ -25,9 +26,15 @@ export PATH=//Applications/Sublime\ Text.app/Contents/SharedSupport/bin/:$PATH
 export PATH=$HOME/Documents/platform-tools/:$PATH
 export PATH=$HOME/.maestro/bin:$PATH
 export PATH=$HOME/.nvm/versions/node/v18.20.2/bin/node:$PATH
-export PATH=$HOME/.rd/bin:$PATH
-export PATH=$HOME/Library/Python/3.9:$PATH
 
+### RANCHER DESKTOP 
+export PATH=$HOME/.rd/bin:$PATH
+### RANCHER DESKTOP 
+
+### Python
+export PATH=$HOME/Library/Python/3.9:$PATH
+export PATH=$HOME/Downloads/Free\ Server/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages:$PATH
+### Python
 
 # java
 export M2_HOME=/user/apple/apache-maven-3.0.3
