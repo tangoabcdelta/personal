@@ -1,0 +1,17 @@
+name: Crypto Price Check
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour
+jobs:
+  price-check:
+    runs-on: [ self-hosted ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch Bitcoin Price
+        run: |
+          curl -s https://api.coindesk.com/v1/bpi/currentprice/BTC.json | jq '.bpi.USD.rate' > btc_price.txt
+          cat btc_price.txt
