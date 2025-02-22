@@ -1,4 +1,4 @@
-name: basic-checks
+name: Basic Checks
 on:
   pull_request:
     branches:
