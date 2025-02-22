@@ -13,15 +13,42 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Python and Dependencies
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
+      - name: Check Python Installation
+        run: |
+          if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            if ! command -v python3 &> /dev/null; then
+              echo "Python is not installed. Installing Python on Ubuntu..."
+              sudo apt-get update
+              sudo apt-get install python3.8
+            else
+              echo "Python is already installed on Ubuntu."
+            fi
+          elif [[ "$OSTYPE" == "darwin"* ]]; then
+            if ! command -v python3 &> /dev/null; then
+              echo "Python is not installed. Installing Python on macOS..."
+              brew update
+              brew install python@3.8
+            else
+              echo "Python is already installed on macOS."
+            fi
+          elif [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+            if ! command -v python3 &> /dev/null; then
+              echo "Python is not installed. Installing Python on Windows..."
+              choco install python --version=3.8
+            else
+              echo "Python is already installed on Windows."
+            fi
+          else
+            echo "Unsupported OS type: $OSTYPE"
+          fi
 
       - name: Install Sentiment Analysis Library
-        run: pip install textblob
+        run: |
+          if ! pip show textblob > /dev/null 2>&1; then
+            pip install textblob
+          fi
 
       - name: Analyze Commit Messages
         run: |
           git log -1 --pretty=%B > commit_message.txt
-          python -c "import textblob with open('commit_message.txt', 'r') as file: commit_message = file.read()    analysis = textblob.TextBlob(commit_message) print(f'Sentiment: {analysis.sentiment}')"
+          python analyze_commit.py
