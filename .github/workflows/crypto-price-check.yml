@@ -11,7 +11,47 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Fetch CurrencyAPI.com Exchange Rates
+        run: |
+          curl -X GET "https://api.currencyapi.com/v3/latest?apikey=${{ secrets.CURRENCYAPI_API_KEY }}&currencies=USD,EUR,GBP" \
+               -o currencyapi.json
+
+      # jq is like sed for JSON data,
+      # you can use it to slice and filter and map and transform structured data
+      # with the same ease that sed, awk, grep
+      # and friends let you play with text.
+      # - name: Fetch Bitcoin Price
+      #   run: |
+      #     curl -s https://api.coindesk.com/v1/bpi/currentprice/BTC.json | jq '.bpi.USD.rate' > btc_price.txt
+      #     cat btc_price.txt
+
+      # - name: Fetch CurrencyLayer Exchange Rates
+      #   run: |
+      #     curl -G "http://api.currencylayer.com/live" \
+      #          -d "access_key=${{ secrets.CURRENCYLAYER_ACCESS_KEY }}" \
+      #          -d "currencies=USD,EUR,GBP" \
+      #          -o currencylayer.json
+
+      - name: Fetch Frankfurter Exchange Rates
+        run: |
+          curl -X GET "https://api.frankfurter.app/latest?from=USD&to=EUR,GBP" \
+               -o frankfurter.json
+
+      # - name: Fetch Open Exchange Rates
+      #   run: |
+      #     curl -G "https://openexchangerates.org/api/latest.json" \
+      #          -d "app_id=${{ secrets.OPENEXCHANGERATES_APP_ID }}" \
+      #          -d "symbols=USD,EUR,GBP" \
+      #          -o openexchangerates.json
+
       - name: Fetch Bitcoin Price
         run: |
-          curl -s https://api.coindesk.com/v1/bpi/currentprice/BTC.json | jq '.bpi.USD.rate' > btc_price.txt
-          cat btc_price.txt
+          response=$(curl --location 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur,gbp')
+          usd_price=$(echo "$response" | jq -r '.bitcoin.usd')
+          eur_price=$(echo "$response" | jq -r '.bitcoin.eur')
+          gbp_price=$(echo "$response" | jq -r '.bitcoin.gbp')
+
+          echo "USD Price: $usd_price"
+          echo "EUR Price: $eur_price"
+          echo "GBP Price: $gbp_price"
+          
