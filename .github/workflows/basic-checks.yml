@@ -7,16 +7,77 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+        runner:
+          type: choice
+          description: Provide the runner name
+          required: true
+          default: self-hosted
+          options:
+            - ubuntu-latest
+            - windows-latest
+            - macos-latest
+            - self-hosted 
+
+env:
+  APP_NAME: personal
+  BRANCH_NAME: main
+  ENVIRONMENT: dev
+  DEVICE: desktop
+  BROWSER: chrome
+  GITHUB_SHA: ${{github.sha}}
+  WORKFLOW_NAME: ${{github.workflow}}
+  DOWNLOAD_PATH: /downloads
 
 jobs:
   basic-checks:
-    runs-on: [ self-hosted ]
+    runs-on: ${{ inputs.runner }}
+    # runs-on: ${{ matrix.runner }}
+    # strategy:
+      # matrix:
+        # runner: [ ubuntu-latest, windows-latest, macos-latest, self-hosted ]
+
     steps:
       - name: my-step
         run: echo "Hello World!"
 
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Set short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
+
+      - name: Set version
+        run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+
+      - name: Set Branch Name
+        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+      - name: Set Commit Path
+        run: echo "COMMIT_PATH=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}" >> $GITHUB_ENV
+
+      - name: Set Workflow Path
+        run: echo "WORKFLOW_PATH=${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}" >> $GITHUB_ENV
+
+      - name: Reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: reports
+          path: /reports
+
+      - name: Push Reports
+        if: ${{ hashFiles('/reports/output/') != '' }}
+        run: |
+          echo "uploading reports as per instructions in the push-report file"
+          npm run pushReport
+
+      - name: Check Failure
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: logs
+          path: /logs
 
       - name: Phony Check
         run: exit 0
