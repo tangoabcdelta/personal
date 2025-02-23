@@ -94,3 +94,12 @@ tmp
 node_modules
 
 package-lock.json
+
+# Entire React Repo
+react
+react/*
+
+
+# Entire repos
+actions-runner/*
+ImageSave-Chrome-Web-Store/*
