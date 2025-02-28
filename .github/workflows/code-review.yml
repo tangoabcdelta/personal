@@ -1,0 +1,39 @@
+name: Code Review with Ollama-Codellama
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  code_review:
+    runs-on: [ self-hosted ]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Get list of changed files
+      id: changed_files
+      run: |
+        echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})"
+
+    - name: Review code with Ollama-Codellama
+      id: review
+      run: |
+        files=$(echo "${{ steps.changed_files.outputs.files }}" | tr '\n' ' ')
+        for file in $files; do
+          content=$(cat $file)
+          response=$(curl -X POST "https://api.ollama-codellama.com/review" \
+            -H "Content-Type: application/json" \
+            -d "{\"file\": \"$file\", \"content\": \"$content\"}")
+          echo "$response" >> review_comments.txt
+        done
+
+    - name: Post review comments to PR
+      run: |
+        comments=$(cat review_comments.txt)
+        pr_number=${{ github.event.pull_request.number }}
+        curl -X POST "https://api.github.com/repos/${{ github.repository }}/issues/$pr_number/comments" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d "{\"body\": \"$comments\"}"
