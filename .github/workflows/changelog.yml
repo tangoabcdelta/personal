@@ -24,6 +24,12 @@ jobs:
       run: |
         git log --since="${{ github.event.inputs.start_date }}" --until="${{ github.event.inputs.end_date }}" --pretty=format:"%s" | sort | uniq > CHANGELOG.md
 
+    - name: Upload changelog as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: changelog
+        path: CHANGELOG.md
+
     - name: Commit and push changelog
       run: |
         git config --global user.name 'github-actions[bot]'
