@@ -1,0 +1,33 @@
+name: Generate Changelog
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Start date for the changelog (YYYY-MM-DD)'
+        required: true
+        default: '2023-01-01'
+      end_date:
+        description: 'End date for the changelog (YYYY-MM-DD)'
+        required: true
+        default: '2023-12-31'
+
+jobs:
+  generate-changelog:
+    runs-on: [ self-hosted ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Generate changelog
+      run: |
+        git log --since="${{ github.event.inputs.start_date }}" --until="${{ github.event.inputs.end_date }}" --pretty=format:"%s" | sort | uniq > CHANGELOG.md
+
+    - name: Commit and push changelog
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add CHANGELOG.md
+        git commit -m "Update changelog from ${{ github.event.inputs.start_date }} to ${{ github.event.inputs.end_date }}"
+        git push
