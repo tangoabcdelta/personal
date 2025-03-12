@@ -1,0 +1,18 @@
+name: Get Change Details from Jira
+on:
+  workflow_dispatch:
+    inputs:
+      jira_ticket:
+        description: 'Jira Ticket Key'
+        required: true
+
+jobs:
+  extract-field:
+    runs-on: [ self-hosted ]
+    steps:
+      - name: Extract Custom Field from Jira
+        run: |
+          curl --location 'https://your-domain.atlassian.net/rest/api/latest/issue/${{ github.event.inputs.jira_ticket }}' \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Bearer ${{ secrets.JIRA_PAT_TOKEN }}' \
+          | jq '.fields.customfield_12345'
