@@ -6,5 +6,8 @@ This repository contains various projects and code samples that I have worked on
 
 Feel free to explore and use any of the code provided here. Contributions and feedback are welcome.
 
-
+```
+# if gt fails when pushing commit to github
+git config http.postBuffer 524288000
+```
 ---
