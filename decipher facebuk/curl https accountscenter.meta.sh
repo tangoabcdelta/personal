@@ -1,0 +1,23 @@
+curl ^"https://accountscenter.meta.com/api/graphql/^" ^
+  -H ^"accept: */*^" ^
+  -H ^"accept-language: en-GB,en-US;q=0.9,en;q=0.8^" ^
+  -H ^"content-type: application/x-www-form-urlencoded^" ^
+  -b ^"datr=CnUzabVjjyVl-PJHswImN79T; fs=FrLEjb3Tn68CFhQYDk53cW8taXg1MWNPVTlnFprUm5MNAA^%^3D^%^3D; locale=en_GB^" ^
+  -H ^"origin: https://accountscenter.meta.com^" ^
+  -H ^"priority: u=1, i^" ^
+  -H ^"referer: https://accountscenter.meta.com/info_and_permissions/dyi^" ^
+  -H ^"sec-ch-prefers-color-scheme: light^" ^
+  -H ^"sec-ch-ua: ^\^"Chromium^\^";v=^\^"142^\^", ^\^"Google Chrome^\^";v=^\^"142^\^", ^\^"Not_A Brand^\^";v=^\^"99^\^"^" ^
+  -H ^"sec-ch-ua-full-version-list: ^\^"Chromium^\^";v=^\^"142.0.7444.176^\^", ^\^"Google Chrome^\^";v=^\^"142.0.7444.176^\^", ^\^"Not_A Brand^\^";v=^\^"99.0.0.0^\^"^" ^
+  -H ^"sec-ch-ua-mobile: ?0^" ^
+  -H ^"sec-ch-ua-model: ^\^"^\^"^" ^
+  -H ^"sec-ch-ua-platform: ^\^"Windows^\^"^" ^
+  -H ^"sec-ch-ua-platform-version: ^\^"19.0.0^\^"^" ^
+  -H ^"sec-fetch-dest: empty^" ^
+  -H ^"sec-fetch-mode: cors^" ^
+  -H ^"sec-fetch-site: same-origin^" ^
+  -H ^"user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36^" ^
+  -H ^"x-asbd-id: 359341^" ^
+  -H ^"x-fb-friendly-name: FXPasswordReauthenticationMutation^" ^
+  -H ^"x-fb-lsd: ti57i90qfpqfq202rE6Ycm^" ^
+  --data-raw ^"av=666847826522393^&__user=0^&__a=1^&__req=19^&__hs=20428.HYP^%^3Aaccounts_center_pkg.2.1...0^&dpr=1^&__ccg=EXCELLENT^&__rev=1030710058^&__s=lcoloe^%^3At9ju8f^%^3Amhlokd^&__hsi=7580531692754660227^&__dyn=7xeUmwlEnwn8K2Wmh0no6u5U4e0yoW3q32360CEbo1nEhw2nVE4W099w8G1Dz81s8hwnU2lwv89k2C1Fwc60D82IzXwae4UaEW0Loco5G0zK1swa-0raazo7u0zE2ZwrUdUco9E3Lwr86C1nw4xxW1owmU3yw^&__csr=gVf9s_jfrthliHRljbIhaQ-QJeleysxemJ4Vkh5ieGqiXlKltHh6SBQOfOiF4IERHgV9tblsKAQh4iKyVHRnCl58S-h28OQJkFpypBBCz9AQFugxoTyaHGtrDyXhGUK4oTiHp8y8YDSWgGt2WGXBFHDX8498CKlogGaBy-pamHJ2qDAumahA5uKmVFGHqhox3ArBGmfxi8UxfHGAbxqm0X-2C0WU6Gi4PFo-00lHuGK2CUx4w8SE0Za1LwtlwOzooxuWzE2Jy8cUtG9Bw-maK1oDAwDw16Smm069Xw-w0xUxIEg1m5xumXWGGJ5A-qECAR-_UbU8kpwrC3TDy8kIayU1MXKqiW-UK-8GmXy9bAKjAK9KGKqV9poOFeEK6UCeKGHz-LAAAGq-V9vHGEyXGZaaAXDKFUSXCCBACy9eV4fCyWx-q5kczUlwxxCi2B6UGmquq5pVEzG_-F6VFqGAVWBH-2SjDU3cxmmu15xOqaws9998bHAxed_iwOGaG3Srw2LXGq8KeBBGJeXKcyKdAIzDxmXxuXCyogyWWp9XWGHWAKV8yV9E2RHZHVFZaBAX_BWz43D-^&__hsdp=glPgqM4mMd6NKFo1JkVoao0w6m5-u9g4rBx68Cy1dM4h0vwJAMwmdgCao81gcock54Q4WAAap0z8m410W0Eo8EtAwDxe2K1exG18wjCrayh8GfgW53wBxG37ouwaQEkwx60gokg2SDwhJ7g4gium1U30g2E8Ey10Iyz1olxp1Deb504qgqh1825bwcm1vwngE2i3okdGejU4m1yzNcB5z81p8gxPg27o3iD80ewyax60EU1wU0TO0cBwlUsAwai0K82Iw8v-6EjyE23w48wsu0GV8bU5a4bggwMyohwQw4cy8883_waS0D9ogwNh8a8G15wzwbC1fwjU420piq09Co2kyE8Vo6S^&__hblp=05lxS0r-9w2aUSfxi16-i48Xx2U1xE9Qum9wq8aoqxTwJGcjyrxt28524EfoliCxqi3K2KfBDzu226EpwKzU46q6AUW48Xxe6QiayEuzAufz84u1GxedBwEG2eayUjx-uewygGq2q1bwwK0ZE9onyk6K14xR3Epwnu1FxDwho9oswa-7o7m6U4eq3fxe8wywVCwIwKxy0yUa81k8rwQzEG1kw8i1dyE88c80yN0bu2m1wwjo5m0ofw6WxC0a8wkohxSewHxuq0Zo3qyE2FwkE1no8VUck0z8kwcKmm3CewmUzxl0moao7C1EG9xK5Uiw4SgG263K4EK5U19UpwSwMxeAE98W2y19wGw9y22u0E9UC2m1pw4WxG0nmbxi1wwOw6Kw^&__sjsp=glPgqMvg9z1z1IkrG0rJe2-081Bwxyk1ewG4T0h41-2Sj7xh1hww50NwhQQ067U1fE4C9wo3w3qgE0lG^&__comet_req=8^&fb_dtsg=NAftr3G1yoVLzkkKZ8p1zGYTEAJ9oqRsK2UvDh5tVfD_lmlfuNwvUYg^%^3A10^%^3A1764979981^&jazoest=25720^&lsd=ti57i90qfpqfq202rE6Ycm^&__spin_r=1030710058^&__spin_b=trunk^&__spin_t=1764980073^&__jssesw=1^&qpl_active_flow_ids=856558363^&fb_api_caller_class=RelayModern^&fb_api_req_friendly_name=FXPasswordReauthenticationMutation^&server_timestamps=true^&variables=^%^7B^%^22input^%^22^%^3A^%^7B^%^22account_id^%^22^%^3A^%^22666847833189059^%^22^%^2C^%^22account_type^%^22^%^3A^%^22FRL^%^22^%^2C^%^22category_name^%^22^%^3A^%^22SecuredActionDownloadYourInformationCategory^%^22^%^2C^%^22password^%^22^%^3A^%^7B^%^22sensitive_string_value^%^22^%^3A^%^22^%^23PWD_BROWSER^%^3A5^%^3A1764982301^%^3AAbFQAPq4OSTdeZFCvDMcicV09ZUoelSoUaP7meHDNL8fWh4OsGbV6NYkOwMyX1^%^2FUYs^%^2BBxIbkF^%^2BAY6H^%^2BYflKWjkWDkwZCFo4izLDh0Gkq0xs3Rz0dRJjufTtiOXKVEQFexR^%^2Fyr13tsVejgy5JHwknrtus^%^2Bdc5fz0dJyo^%^3D^%^22^%^7D^%^2C^%^22actor_id^%^22^%^3A^%^22666847826522393^%^22^%^2C^%^22client_mutation_id^%^22^%^3A^%^225^%^22^%^7D^%^7D^&doc_id=9884242298280664^&fb_api_analytics_tags=^%^5B^%^22qpl_active_flow_ids^%^3D856558363^%^22^%^5D^"
