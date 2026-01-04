@@ -1,0 +1,12 @@
+node_modules
+dist
+.DS_Store
+vite.config.ts.*
+*.tar.gz
+.pnpm-debug.log*
+.env
+firebase-debug.log*
+.firebase
+
+test-results
+playwright-report
