@@ -1,0 +1,28 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "timeout": 5, // Increase this value as needed (e.g., 60 seconds)
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "hello.py", // "program": "${file}",
+      // "console": "integratedTerminal",
+      "console": "internalConsole",
+      "envFile": "${workspaceFolder}/.env",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true,
+      "args": ["--your-arg", "value"], // Replace with actual arguments your script expects
+    },
+    {
+      "name": "PowerShell Launch Script",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "Enter path or command to execute, for example, ${workspaceFolder}/src/foo.ps1 or Invoke-Pester",
+      "cwd": "${cwd}"
+    }
+  ]
+}
