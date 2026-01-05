@@ -1,0 +1,18 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" transform="rotate(78.40806579589844 576.4808959960938,268.5896301269531) " id="svg_5">
+   <path stroke="null" id="svg_4" d="m863.07795,8.90507c48.84011,69.61684 31.54257,183.80849 8.14002,274.96148c-22.8938,91.15299 -51.38387,159.76814 -100.73273,218.86733c-48.84011,59.60003 -118.53902,109.68409 -181.11542,102.67232c-62.57639,-7.01177 -118.03027,-71.11936 -184.67668,-130.21855c-66.13765,-59.60003 -143.46783,-114.19165 -146.01159,-171.28748c-2.54376,-57.09583 69.19016,-117.1967 135.83656,-186.31269c66.13765,-69.61684 127.18779,-148.74965 215.20175,-175.79504c88.01395,-27.04539 204.00922,-2.00336 253.35808,67.11264z" fill="#FF0066"/>
+  </g>
+  <text stroke="#000" opacity="0.36" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="43" id="svg_6" y="575" x="27" fill="#000000">Big Fat Software, Inc.</text>
+ </g>
+</svg>
