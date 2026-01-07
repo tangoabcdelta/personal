@@ -1,0 +1,30 @@
+https://outline.com/
+
+I think mere archiving project ka closest match ye hoga
+I have just started using this
+Features are exactly what I need right now:
+
+
+1. Fetch an article
+2. Archive it
+3. Annotate
+ye teeno features mil gaye
+
+jo nahi mila...
+4. Offline use (app mein ho, sayad)
+5. Keeping it for life (jab tak company ki saans chal rahi hai)
+6. Access from a Bash Shell (so that I can use it on a sasta laptop)
+7. Tag cloud from similar words (so that I can type tags when I don't remember the exact contents article)
+8. Creating Tree (based on topic e.g. Video games n violence wale sare articles be clubbed under one node)..
+
+..aur bhi req. hain mere.. 
+
+but so far, this one's good.
+
+
+One liner desc for the Archiving app I was talking about:
+
+Quickly searchable, offline, and bash terminal access wala Hacker News chahiye mujhe (with article ka auto web archiving facility for future access) 
+
+
+https://outline.com/ - ye kaafi requirements meet kar raha hai mere
