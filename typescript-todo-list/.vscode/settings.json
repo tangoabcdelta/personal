@@ -1,6 +1,6 @@
 {
   // "github.copilot.inlineSuggest.enable": false, // did not work
   // "editor.inlineSuggest.enabled": false, // disables autocomplete
-  "window.zoomLevel": 0.5,  
+  "window.zoomLevel": 0.25,
 }
 
