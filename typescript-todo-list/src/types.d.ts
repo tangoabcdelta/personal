@@ -1,0 +1,1 @@
+types MS = `${number}ms`;

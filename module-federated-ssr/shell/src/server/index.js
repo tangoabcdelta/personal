@@ -33,9 +33,10 @@ app.get('/*', (req, res) => {
             // Writing the HTML Document Shell
             // The comments are intended to assist with additional insertion if required
             // e.g. analytics and other scripts
-            // Doctype
-            res.write(`<!DOCTYPE html><html ${helmet.htmlAttributes.toString()}><head>`);
-            // Writing Title
+            // Write Doctype and open the head
+            res.write(`<!DOCTYPE html><html ${helmet.htmlAttributes.toString()}>`);
+            // Opening the <head> and writing the 'Title' in it
+            res.write(`<head>`);
             res.write(`${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}`);
             // Closing the head
             res.write(`</head>`);
