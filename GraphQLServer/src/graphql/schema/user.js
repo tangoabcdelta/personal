@@ -4,6 +4,7 @@
 const { gql } = require("apollo-server");
 
 const userTypeDefs = gql`
+
   type ID {
     value: String!
   }
@@ -18,6 +19,15 @@ const userTypeDefs = gql`
     user: User
     errors: [Error]
   }
+
+
+  scalar Void
+
+  extend type Query {
+    findRegisteredUserById(id: String!): Void
+  }
+  
+
 
   extend type Query {
     id: String!

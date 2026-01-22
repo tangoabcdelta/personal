@@ -1,3 +1,4 @@
+// Not in use
 const User = require('../../models/User');
 
 const userResolvers = {

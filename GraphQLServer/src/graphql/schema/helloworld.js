@@ -5,6 +5,7 @@ const helloWorldTypeDefs = gql`
     hello: String!
     hifive: String!
     id: String!
+    helloWhatever(name: String!): String!
   }
 `;
 

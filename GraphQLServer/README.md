@@ -59,6 +59,119 @@ query {
 }
 ```
 
+## Mutation Examples
+
+- To write a GraphQL mutation query, you need to match the structure of the data it returns.
+- The `register` field returns an object containing an array of `errors` and user details like `id` and `username`.
+
+### The Mutation Query - How to structure the request
+
+Based on the `userTypeDefs`, the mutation query needs to pass the arguments (`username`, `password`, and `age`) directly into the `register` field.
+
+### How to pass the variables to Mutation Query
+
+When writing the query,
+
+- First, you define the variable types in the header (the `mutation` line) and,
+- Then pass them into the `register` argument list.
+
+```graphql
+mutation Register($username: String!, $password: String!, $age: Int) {
+  register(username: $username, password: $password, age: $age) {
+    user {
+      id {
+        value
+      }
+      username
+      age
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+
+```
+
+### 2. The Variables (JSON)
+
+In your frontend (or GraphQL Playground/Apollo Studio), you provide the values in a separate JSON object:
+
+```json
+{
+  "username": "test name",
+  "password": "mypassword123",
+  "age": 25
+}
+
+```
+
+### Basic Hygiene
+
+**Remember**: In GraphQL, the `Register` in `mutation Register(...)` is technically called the **Operation Name**. Think of it like naming a function in JavaScript versus using an anonymous function. You can technically write a "shorthand" mutation like this, and it will work perfectly fine:
+
+```graphql
+mutation($username: String!) {
+  register(username: $username) {
+    user {
+      username
+    }
+  }
+}
+```
+
+Even though it's optional, naming your operations is a professional standard.
+
+- **Debugging & Logging:** When your server logs an error, it's much easier to see `Error in operation: RegisterUser` than `Error in operation: anonymous`.
+- **APM (Application Performance Monitoring):** Tools like Apollo Studio, Datadog, or New Relic group metrics by operation name. If you don't name them, all your mutations get lumped together into one "anonymous" bucket, making it impossible to see which specific mutation is slow.
+- **Client-side Caching:** Some frontend libraries (like Apollo Client) use operation names to help manage how data is cached or refetched.
+- **Readability:** Just like code, it tells the next developer (or future you) exactly what the intent of this query is without needing to read the whole selection set.
+
+---
+
+### A Quick Summary Table
+
+| Part of Query | Technical Term | Mandatory? | Purpose |
+| --- | --- | --- | --- |
+| `mutation` | **Operation Type** | Yes | Tells the server if this is a Read (Query) or Write (Mutation). |
+| `RegisterUser` | **Operation Name** | **No** | For logging, debugging, and tracking. |
+| `$username` | **Variable Definition** | Yes (if used) | Declares what data types the query expects. |
+| `register(...)` | **Field / Resolver** | Yes | The actual function on the server you are calling. |
+
+---
+
+### Important Observations for your Schema
+
+1. **The ID Type**: You defined a custom `type ID { value: String! }`. GraphQL has a built-in `ID` scalar. So, you need not pass it as a sub-field.
+2. **The Resolver Match**: Your previous resolver returned `id` and `username` at the top level, but your `RegisterResponse` type expects a `user` object. You will need to wrap the user data in your resolver to match the schema:
+
+**Corrected Resolver to match your TypeDefs:**
+
+```javascript
+register: (_, { username, password, age }) => {
+  return {
+    user: {
+      id: { value: "1" }, // Matches your 'type ID' object
+      username: username,
+      age: age
+    },
+    errors: [] // Or your error array
+  };
+}
+
+```
+
+### Why the query works this way
+
+The flow of data follows a specific path from your client to your server:
+
+1. **Variables Declaration**: `$username: String!` tells GraphQL to expect a required string from the client.
+2. **Argument Passing**: `register(username: $username)` maps that client variable to the resolver's argument.
+3. **Selection Set**: `{ user { id { value } } }` tells the server exactly which nested pieces of data to send back.
+
+Would you like me to show you how to handle that `null` value you had in your error array so it doesn't break the frontend?
+
 ---
 
 ## GraphQL Project Structure for Node.js 10-16
@@ -169,7 +282,5 @@ module.exports = { typeDefs, resolvers };
 
 [GraphQL project structure tutorial](https://www.youtube.com/watch?v=9tI4SlymIns)
 This video provides a step-by-step walkthrough of organizing schemas, resolvers, and models in a real-world Node.js GraphQL application.
-
-**Would you like me to help you write the `server.js` code to tie these folders together using Apollo Server or Express-GraphQL?**
 
 ---
