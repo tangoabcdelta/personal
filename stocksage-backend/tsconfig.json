@@ -2,14 +2,21 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    "rootDir": "./src",
+    "outDir": "./dist",
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
-    "target": "esnext",
+    // "module": "commonjs",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    // "target": "esnext",
+    "target": "es2022",
     "types": [],
+
+    
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -25,6 +32,7 @@
     "exactOptionalPropertyTypes": true,
 
     // Style Options
+    "forceConsistentCasingInFileNames": true,
     // "noImplicitReturns": true,
     // "noImplicitOverride": true,
     // "noUnusedLocals": true,
@@ -40,5 +48,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
 }
