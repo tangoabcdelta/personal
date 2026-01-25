@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Minimal Extension",
+  "version": "1.0.0",
+  "description": "A basic example extension with only required keys",
+  "icons": {
+    "16": "icons/022-dice-16.png",
+    "32": "icons/022-dice-32.png",
+    "48": "icons/022-dice-48.png",
+    "64": "icons/022-dice-64.png",
+    "128": "icons/022-dice.svg"
+  },
+  "host_permissions": [
+    "<all_urls>",
+    "https://*/*", 
+    "http://*/*"
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "cookies",
+    "activeTab",
+    "scripting",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "debugger",
+    "webRequest",
+    "idle",
+    "webNavigation",
+    "tabs",
+    "browsingData",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "topSites"
+  ],
+  
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+   {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ]
+   
+}
