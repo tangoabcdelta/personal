@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-deployment
+  labels:
+    app: graphql-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql-app
+  template:
+    metadata:
+      labels:
+        app: graphql-app
+    spec:
+      containers:
+        - name: config
+          image: graphql-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9120
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graphql-service
+spec:
+  type: NodePort # Use LoadBalancer if using Docker Desktop or Minikube tunnel
+  selector:
+    app: graphql-app
+  ports:
+    - protocol: TCP
+      port: 80         # Port exposed inside the cluster
+      targetPort: 8080 # Points to your 'assembler' container port
+      nodePort: 30080  # Access via http://localhost:30080
