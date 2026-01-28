@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrderType {
+  MARKET
+  LIMIT
+  STOPLOSS
+  INTRADAY
+  CNC
+}
+
+model StockIndicator {
+  id        String    @id @default(cuid())
+  symbol    String    @unique
+  pe        Float
+  pb        Float
+  de        Float
+  roe       Float
+  peg       Float
+  current   Float
+  updatedAt DateTime  @updatedAt
+}
+
+model Portfolio {
+  id        String    @id @default(cuid())
+  userId    String    @unique
+  trades    Trade[]
+}
+
+model Trade {
+  id        String    @id @default(cuid())
+  symbol    String
+  type      OrderType
+  qty       Float
+  buyPrice  Float
+  sellPrice Float?
+  pnl       Float     @default(0)
+  fees      Json      // Stores brokerage, stt, exchange fees
+  timestamp DateTime  @default(now())
+}
+
+model DecisionTree {
+  id        String    @id @default(cuid())
+  symbol    String
+  thesis    String
+  score     Float
+  nodes     Json      // Serialized tree structure for persistence
+  createdAt DateTime  @default(now())
+}
